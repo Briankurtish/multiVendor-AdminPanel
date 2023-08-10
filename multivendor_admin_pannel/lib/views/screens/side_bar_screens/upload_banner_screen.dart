@@ -11,6 +11,8 @@ class UploadBannerScreen extends StatefulWidget {
 class _UploadBannerScreenState extends State<UploadBannerScreen> {
   dynamic _image;
 
+  String? fileName;
+
   pickImage() async {
     FilePickerResult? result = await FilePicker.platform
         .pickFiles(allowMultiple: false, type: FileType.image);
@@ -18,6 +20,8 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
     if (result != null) {
       setState(() {
         _image = result.files.first.bytes;
+
+        fileName = result.files.first.name;
       });
     }
   }
