@@ -71,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
     return AdminScaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.green.shade800,
+        backgroundColor: Colors.yellow.shade900,
         title: Text("Admin Panel"),
       ),
       sideBar: SideBar(
@@ -116,6 +116,32 @@ class _MainScreenState extends State<MainScreen> {
         onSelected: (item) {
           screenSelector(item);
         },
+        header: Container(
+          height: 50,
+          width: double.infinity,
+          color: const Color(0xff444444),
+          child: const Center(
+            child: Text(
+              'Multi Vendor Panel',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        footer: Container(
+          height: 50,
+          width: double.infinity,
+          color: const Color(0xff444444),
+          child: const Center(
+            child: Text(
+              'footer',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
       ),
       body: _selectedItem,
     );
