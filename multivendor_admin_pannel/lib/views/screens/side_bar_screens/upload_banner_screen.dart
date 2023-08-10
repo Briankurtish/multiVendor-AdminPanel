@@ -1,7 +1,26 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-class UploadBannerScreen extends StatelessWidget {
+class UploadBannerScreen extends StatefulWidget {
   static const String routeName = '\UploadBannerScreen';
+
+  @override
+  State<UploadBannerScreen> createState() => _UploadBannerScreenState();
+}
+
+class _UploadBannerScreenState extends State<UploadBannerScreen> {
+  dynamic _image;
+
+  pickImage() async {
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(allowMultiple: false, type: FileType.image);
+
+    if (result != null) {
+      setState(() {
+        _image = result.files.first.bytes;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +68,9 @@ class UploadBannerScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         primary: Colors.green.shade800,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        pickImage();
+                      },
                       child: Text("Upload Image"),
                     ),
                   ],
