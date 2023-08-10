@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class UploadBannerScreen extends StatefulWidget {
@@ -9,6 +10,7 @@ class UploadBannerScreen extends StatefulWidget {
 }
 
 class _UploadBannerScreenState extends State<UploadBannerScreen> {
+  final FirebaseStorage _storage = FirebaseStorage.instance;
   dynamic _image;
 
   String? fileName;
@@ -24,6 +26,17 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
         fileName = result.files.first.name;
       });
     }
+  }
+
+  _uploadBannersToStorage(dynamic image) async {
+    Reference ref = _storage.ref().child('Banners').child(fileName!);
+
+    UploadTask uploadTask = ref.putData(image);
+
+    TaskSnapshot snapshot = await uploadTask;
+    String downloadUrl = await snapshot.ref.getDownloadURL();
+
+    return downloadUrl;
   }
 
   @override
