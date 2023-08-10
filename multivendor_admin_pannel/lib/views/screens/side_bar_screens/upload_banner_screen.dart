@@ -52,6 +52,10 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
         'image': imageUrl,
       }).whenComplete(() {
         EasyLoading.dismiss();
+
+        setState(() {
+          _image = null;
+        });
       });
     }
   }
