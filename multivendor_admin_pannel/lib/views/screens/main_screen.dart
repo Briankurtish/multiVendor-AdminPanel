@@ -71,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
     return AdminScaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.yellow.shade900,
+        backgroundColor: Colors.green.shade800,
         title: Text("Admin Panel"),
       ),
       sideBar: SideBar(
