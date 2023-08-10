@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class VendorsScreen extends StatelessWidget {
+  static const String routeName = "\VendorScreen";
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

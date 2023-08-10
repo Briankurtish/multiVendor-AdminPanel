@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class OrderScreen extends StatelessWidget {
+  static const String routeName = '\OrderScreen';
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
