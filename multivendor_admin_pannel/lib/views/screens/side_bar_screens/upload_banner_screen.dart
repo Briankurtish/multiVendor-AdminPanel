@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ class UploadBannerScreen extends StatefulWidget {
 
 class _UploadBannerScreenState extends State<UploadBannerScreen> {
   final FirebaseStorage _storage = FirebaseStorage.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   dynamic _image;
 
   String? fileName;
@@ -37,6 +40,16 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
     String downloadUrl = await snapshot.ref.getDownloadURL();
 
     return downloadUrl;
+  }
+
+  uploadToFirestore() async {
+    if (_image != null) {
+      String imageUrl = await _uploadBannersToStorage(_image);
+
+      await _firestore.collection('banners').doc(fileName).set({
+        'image': imageUrl,
+      });
+    }
   }
 
   @override
@@ -105,7 +118,9 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.green.shade800,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  uploadToFirestore();
+                },
                 child: Text("Save"),
               ),
             ],
